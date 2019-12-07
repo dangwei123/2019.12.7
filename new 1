@@ -1,0 +1,214 @@
+>mysql -u root -p
+Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 12
+Server version: 5.7.27 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2019, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| class_13_db        |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql> use class_13_db;
+Database changed
+mysql> create table stu_score
+(
+name varchar(20),
+number int,
+chinese int,
+math int,
+english int,
+data_struct int,
+mysql int
+);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> des stu_score;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| name        | varchar(20) | YES  |     | NULL    |       |
+| number      | int(11)     | YES  |     | NULL    |       |
+| chinese     | int(11)     | YES  |     | NULL    |       |
+| math        | int(11)     | YES  |     | NULL    |       |
+| english     | int(11)     | YES  |     | NULL    |       |
+| data_struct | int(11)     | YES  |     | NULL    |       |
+| mysql       | int(11)     | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+7 rows in set (0.01 sec)
+
+insert into stu_score values('lily',01,78,57,88,45,63);
+insert into stu_score values('yeshuai',02,67,79,35,72,94);
+insert into stu_score values('liye',03,100,100,100,100,100);
+insert into stu_score values('kebi',04,68,93,87,52,59);
+
+select* from stu_score;
++---------+--------+---------+------+---------+-------------+-------+
+| name    | number | chinese | math | english | data_struct | mysql |
++---------+--------+---------+------+---------+-------------+-------+
+| lily    |      1 |      78 |   57 |      88 |          45 |    63 |
+| yeshuai |      2 |      67 |   79 |      35 |          72 |    94 |
+| liye    |      3 |     100 |  100 |     100 |         100 |   100 |
+| kebi    |      4 |      68 |   93 |      87 |          52 |    59 |
++---------+--------+---------+------+---------+-------------+-------+
+4 rows in set (0.00 sec)
+
+
+insert into stu_score(name,number) values
+('haha',05),
+('hwhw',06),
+('brian',07);
+
+select * from stu_score;
++---------+--------+---------+------+---------+-------------+-------+
+| name    | number | chinese | math | english | data_struct | mysql |
++---------+--------+---------+------+---------+-------------+-------+
+| lily    |      1 |      78 |   57 |      88 |          45 |    63 |
+| yeshuai |      2 |      67 |   79 |      35 |          72 |    94 |
+| liye    |      3 |     100 |  100 |     100 |         100 |   100 |
+| kebi    |      4 |      68 |   93 |      87 |          52 |    59 |
+| haha    |      5 |    NULL | NULL |    NULL |        NULL |  NULL |
+| hwhw    |      6 |    NULL | NULL |    NULL |        NULL |  NULL |
+| brian   |      7 |    NULL | NULL |    NULL |        NULL |  NULL |
++---------+--------+---------+------+---------+-------------+-------+
+7 rows in set (0.00 sec)
+
+insert into stu_score values
+('zhangsan',08,90,100,77,79,89),
+('wangwu',09,84,67,57,99,100),
+('ciu',10,100,67,35,84,57); 
+
+select *from stu_score;
++----------+--------+---------+------+---------+-------------+-------+
+| name     | number | chinese | math | english | data_struct | mysql |
++----------+--------+---------+------+---------+-------------+-------+
+| lily     |      1 |      78 |   57 |      88 |          45 |    63 |
+| yeshuai  |      2 |      67 |   79 |      35 |          72 |    94 |
+| liye     |      3 |     100 |  100 |     100 |         100 |   100 |
+| kebi     |      4 |      68 |   93 |      87 |          52 |    59 |
+| haha     |      5 |    NULL | NULL |    NULL |        NULL |  NULL |
+| hwhw     |      6 |    NULL | NULL |    NULL |        NULL |  NULL |
+| brian    |      7 |    NULL | NULL |    NULL |        NULL |  NULL |
+| zhangsan |      8 |      90 |  100 |      77 |          79 |    89 |
+| wangwu   |      9 |      84 |   67 |      57 |          99 |   100 |
+| ciu      |     10 |     100 |   67 |      35 |          84 |    57 |
++----------+--------+---------+------+---------+-------------+-------+
+10 rows in set (0.00 sec)
+
+select name,chinese+math+english+data_struct+mysql 总分 from stu_score;
++----------+--------+
+| name     | 总分   |
++----------+--------+
+| lily     |    331 |
+| yeshuai  |    347 |
+| liye     |    500 |
+| kebi     |    359 |
+| haha     |   NULL |
+| hwhw     |   NULL |
+| brian    |   NULL |
+| zhangsan |    435 |
+| wangwu   |    407 |
+| ciu      |    343 |
++----------+--------+
+10 rows in set (0.00 sec)
+
+select *from stu_score order by english;
++----------+--------+---------+------+---------+-------------+-------+
+| name     | number | chinese | math | english | data_struct | mysql |
++----------+--------+---------+------+---------+-------------+-------+
+| haha     |      5 |    NULL | NULL |    NULL |        NULL |  NULL |
+| hwhw     |      6 |    NULL | NULL |    NULL |        NULL |  NULL |
+| brian    |      7 |    NULL | NULL |    NULL |        NULL |  NULL |
+| yeshuai  |      2 |      67 |   79 |      35 |          72 |    94 |
+| ciu      |     10 |     100 |   67 |      35 |          84 |    57 |
+| wangwu   |      9 |      84 |   67 |      57 |          99 |   100 |
+| zhangsan |      8 |      90 |  100 |      77 |          79 |    89 |
+| kebi     |      4 |      68 |   93 |      87 |          52 |    59 |
+| lily     |      1 |      78 |   57 |      88 |          45 |    63 |
+| liye     |      3 |     100 |  100 |     100 |         100 |   100 |
++----------+--------+---------+------+---------+-------------+-------+
+10 rows in set (0.00 sec)
+
+
+select name from stu_score where english<60 and math<60;
+Empty set (0.00 sec)
+
+
+select name from stu_score where math between 80 and 90;
+Empty set (0.00 sec)
+
+select name from stu_score where math is null;
++-------+
+| name  |
++-------+
+| haha  |
+| hwhw  |
+| brian |
++-------+
+3 rows in set (0.00 sec)
+
+
+select * from stu_score limit 3;
++---------+--------+---------+------+---------+-------------+-------+
+| name    | number | chinese | math | english | data_struct | mysql |
++---------+--------+---------+------+---------+-------------+-------+
+| lily    |      1 |      78 |   57 |      88 |          45 |    63 |
+| yeshuai |      2 |      67 |   79 |      35 |          72 |    94 |
+| liye    |      3 |     100 |  100 |     100 |         100 |   100 |
++---------+--------+---------+------+---------+-------------+-------+
+3 rows in set (0.00 sec)
+
+update stu_score set math=100,english=100 ;
+Query OK, 9 rows affected (0.01 sec)
+Rows matched: 10  Changed: 9  Warnings: 0
+
+mysql> select math,english from stu_score;
++------+---------+
+| math | english |
++------+---------+
+|  100 |     100 |
+|  100 |     100 |
+|  100 |     100 |
+|  100 |     100 |
+|  100 |     100 |
+|  100 |     100 |
+|  100 |     100 |
+|  100 |     100 |
+|  100 |     100 |
+|  100 |     100 |
++------+---------+
+10 rows in set (0.00 sec)
+
+
+delete from stu_score where chinese is null;
+Query OK, 3 rows affected (0.01 sec)
+
+mysql> select * from stu_score;
++----------+--------+---------+------+---------+-------------+-------+
+| name     | number | chinese | math | english | data_struct | mysql |
++----------+--------+---------+------+---------+-------------+-------+
+| lily     |      1 |      78 |  100 |     100 |          45 |    63 |
+| yeshuai  |      2 |      67 |  100 |     100 |          72 |    94 |
+| liye     |      3 |     100 |  100 |     100 |         100 |   100 |
+| kebi     |      4 |      68 |  100 |     100 |          52 |    59 |
+| zhangsan |      8 |      90 |  100 |     100 |          79 |    89 |
+| wangwu   |      9 |      84 |  100 |     100 |          99 |   100 |
+| ciu      |     10 |     100 |  100 |     100 |          84 |    57 |
++----------+--------+---------+------+---------+-------------+-------+
+7 rows in set (0.00 sec)
+
